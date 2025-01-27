@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+My Threads By- Sanskar Jangid
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Welcome to MyThreads the unique platforms for modern youth</h1>
+<h2>{%if form.instance.pk %}
+    Edit Thread 
+    {% else %} 
+    Create Thread
+    {% endif %}
+<form method="POST" enctype="multipart/form-data"class="form">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-warning" type="submit">Post</button> 
+</form>
+<a href="{%url 'thread_list' %}">Back to Thread list</a>
+</h2> 
+{% endblock %}
+
+

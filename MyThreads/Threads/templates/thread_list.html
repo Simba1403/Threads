@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+My Threads By- Sanskar Jangid
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<h1 class="text-center">Welcome to MyThreads the unique platforms for modern youth</h1>
+<a class="btn btn-primary" href="{% url 'thread_create'%}">Create a Thread</a>
+<div class="container row gap-3">
+     {% for thread in threads %}
+     <div class="card" style="width: 18rem;">
+        <img src="{{thread.photo.url}}"class="card-img-top" alt="..."> <!--here with thread.photo.url give the image url -->
+        <div class="card-body">
+          <h5 class="card-title">{{thread.user.username}}</h5>
+          <p class="card-text">{{thread.text}}</p>
+
+          {%if thread.user == user%}
+          <a href="{%url 'edit_thread' thread.id %}" class="btn btn-primary">Edit</a> <!--thread.id here act as a url-->
+          <a href="{%url 'thread_delete' thread.id %}" class="btn btn-danger">Delete</a>
+           {% endif %}
+        </div>
+      </div>
+     {% endfor %}
+</div>
+{% endblock %}
+
+
